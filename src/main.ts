@@ -4,8 +4,6 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import { Server } from "socket.io";
-import * as fs from 'fs';
 
 // const httpsOptions = {
 //   key: fs.readFileSync('./secrets/private-key.pem'),
@@ -28,6 +26,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(process.env.PORT || 8080)
+  await app.listen(process.env.PORT || 3000)
 }
 bootstrap();
