@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -6,6 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateProfileDto } from 'src/profiles/dto/create-profile.dto';
 import { ProfilesService } from 'src/profiles/profiles.service';
 import { UnitService } from 'src/unit/unit.service';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Controller('user')
 export class UsersController {
@@ -18,6 +19,12 @@ export class UsersController {
   @Post('create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id/delete')
+  delelte() {
+    return 'Not yet implemented'
   }
 
   @UseGuards(JwtAuthGuard)
@@ -37,6 +44,11 @@ export class UsersController {
     return this.profilesService.findOne(userId)
   }
 
+  @ApiProperty()
+  @UseGuards(JwtAuthGuard)
+  @Put(':id/profile')
+
+
 
   @UseGuards(JwtAuthGuard)
   @Get(':id/applications')
@@ -50,4 +62,61 @@ export class UsersController {
     return this.unitService.createApplicationURL(userId)
   }
 
+  /**
+   * DEPOSIT ACCOUNTS
+   */
+
+   @UseGuards(JwtAuthGuard)
+   @Get(':id/accounts')
+   getAccounts(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Get(':id/accounts/:accountId')
+   getAccountsById(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Put(':id/accounts/:accountId')
+   updateAccountById(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Delete(':id/accounts/:accountId/delete')
+   deleteAccountById(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Get(':id/cards')
+   getCards(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Post(':id/cards/create/:type')
+   createCard(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Get(':id/cards/:cardId')
+   getCardByID(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+
+   @UseGuards(JwtAuthGuard)
+   @Put(':id/cards/:cardId')
+   updateCardById(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
+   
+   @UseGuards(JwtAuthGuard)
+   @Delete(':id/cards/:cardId/delete')
+   deleteCardById(@Param('id') userId: string) {
+     return this.profilesService.findOne(userId)
+   }
 }
