@@ -8,6 +8,11 @@ import { LocalAuthGuard } from './auth/local-auth.guard';
 export class AppController {
   constructor(private authService: AuthService) {}
 
+  @Get('/')
+  async returnHome() {
+    return  `Racks | Online`
+  }
+
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
