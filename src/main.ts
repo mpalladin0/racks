@@ -7,9 +7,9 @@ import { AppModule } from './app.module';
 import { Server } from "socket.io";
 import * as fs from 'fs';
 
-const httpsOptions = {
-  key: fs.readFileSync('./secrets/private-key.pem'),
-  cert: fs.readFileSync('./secrets/public-certificate.pem'),}
+// const httpsOptions = {
+//   key: fs.readFileSync('./secrets/private-key.pem'),
+//   cert: fs.readFileSync('./secrets/public-certificate.pem'),}
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { 
