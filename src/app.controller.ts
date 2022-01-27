@@ -13,6 +13,11 @@ export class AppController {
     return  `Racks | Online`
   }
 
+  @Get('/.well-known/acme-challenge/AdVi-CU-ahmDhGj7mEnKY2qo8SNgUVeRtEUqWoRSWbc')
+  async returnChallenge() {
+    return `AdVi-CU-ahmDhGj7mEnKY2qo8SNgUVeRtEUqWoRSWbc.eGvCmrZ8msnGq5sBVvHvjrQhtjilAA1Xf_Fhvl0hnVc`
+  }
+
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
