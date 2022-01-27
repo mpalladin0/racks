@@ -4,7 +4,7 @@ import { Controller, Post, Request } from '@nestjs/common';
 @Controller('unit')
 export class UnitController {
 
-    @Post('applications/approved')
+    @Post('webhook')
     respondToApproval(@Request() req: Request) {
         const payload = req.body.toString()
         console.log("Responding to Unit application approval")
