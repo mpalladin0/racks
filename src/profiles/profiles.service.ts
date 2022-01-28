@@ -27,8 +27,8 @@ export class ProfilesService {
 
   async update(userId: string, updateProfileDto: UpdateProfileDto) {
     const filter = { user: userId }
-    const update = { updateProfileDto }
-    return await this.profileModel.findOneAndUpdate(filter, update)
+    const update = { ...updateProfileDto }
+    return await this.profileModel.findOneAndUpdate(filter, update).exec()
       .catch(err => { return err })
   }
 
