@@ -73,6 +73,7 @@ export class UsersController {
    * @example PUT user/:userId/profile 
    */
   @UseGuards(JwtAuthGuard)
+  @Put(':id/profile')
   updateProfile(
     @Param('id') userId: string,
     @Body('updateProfileDto') updateProfileDto: UpdateProfileDto
