@@ -5,7 +5,7 @@
     }],
     "functions": {
       "dist/main.js": {
-        "runtime": "node"
+        "runtime": "node@14.18.3"
       }
     }
 }
