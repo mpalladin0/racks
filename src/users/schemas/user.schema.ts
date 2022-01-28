@@ -44,4 +44,4 @@ export const UserSchema = SchemaFactory.createForClass(User)
     } catch (err) {
       return next(err);
     }
-  });
+  })

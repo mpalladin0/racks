@@ -25,8 +25,11 @@ export class ProfilesService {
     return result
   }
 
-  update(id: number, updateProfileDto: UpdateProfileDto) {
-    return `This action updates a #${id} profile`;
+  async update(userId: string, updateProfileDto: UpdateProfileDto) {
+    const filter = { user: userId }
+    const update = { updateProfileDto }
+    return await this.profileModel.findOneAndUpdate(filter, update)
+      .catch(err => { return err })
   }
 
   remove(id: number) {

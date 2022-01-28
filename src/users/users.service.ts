@@ -40,18 +40,9 @@ export class UsersService {
   }
 
   async findOneById(id: string): Promise<User | null> {
-    console.log("Searching for user by object id", id)
     const user = await this.userModel.findById(id)
       .populate('profile', '-user')
       .populate('applications', '-user')
-      // .populate('accounts', '-user')
-    //   .populate('payments', '-user')
-    //   .populate('transactions', '-user')
-    //   .populate('cards', '-user')
-    //   .populate('check_deposits', '-user')
-    //   .populate('fees', '-user')
-    //   .populate('auth', '-user')
-    // console.log("User?", user)
     return user
   }
 
@@ -59,7 +50,8 @@ export class UsersService {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async deleteUser(userId: string) {
+    return await this.userModel.findOneAndRemove({ userId })
+      .catch(err => { return err })
   }
 }
