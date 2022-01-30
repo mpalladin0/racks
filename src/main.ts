@@ -10,9 +10,7 @@ import { AppModule } from './app.module';
 //   cert: fs.readFileSync('./secrets/public-certificate.pem'),}
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, { 
-    bodyParser: false 
-  });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
   app.useStaticAssets(join(__dirname, '..', 'static'))

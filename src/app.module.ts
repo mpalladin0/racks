@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,9 +7,6 @@ import { ProfilesModule } from './profiles/profiles.module';
 import { AuthModule } from './auth/auth.module';
 import { UnitModule } from './unit/unit.module';
 import { EventsModule } from './events/events.module';
-import { RawBodyMiddleware } from './RawBodyMiddleware';
-import { JsonBodyMiddleware } from './users/JsonBodyMiddleware';
-import { RouteInfo } from '@nestjs/common/interfaces';
 import { AdminModule } from '@adminjs/nestjs';
 
 @Module({
@@ -35,22 +32,22 @@ import { AdminModule } from '@adminjs/nestjs';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule {
-  public configure(consumer: MiddlewareConsumer) {
-      consumer
-        .apply(RawBodyMiddleware)
-        .forRoutes(...rawBodyParsingRoutes)
-        .apply(JsonBodyMiddleware)
-        .exclude(...rawBodyParsingRoutes)
-        .forRoutes('*')
-        // .apply(MyOtherMiddleware)
-        // .forRoutes({ path: '*', method: RequestMethod.ALL })
-  }
+export class AppModule {
+  // public configure(consumer: MiddlewareConsumer) {
+  //     consumer
+  //       .apply(RawBodyMiddleware)
+  //       .forRoutes(...rawBodyParsingRoutes)
+  //       .apply(JsonBodyMiddleware)
+  //       .exclude(...rawBodyParsingRoutes)
+  //       .forRoutes('*')
+  //       // .apply(MyOtherMiddleware)
+  //       // .forRoutes({ path: '*', method: RequestMethod.ALL })
+  // }
 }
 
-const rawBodyParsingRoutes: Array<RouteInfo> = [
-  {
-    path: '*src/unit/*',
-    method: RequestMethod.POST,
-  },
-]
+// const rawBodyParsingRoutes: Array<RouteInfo> = [
+//   {
+//     path: '*src/unit/*',
+//     method: RequestMethod.POST,
+//   },
+// ]
