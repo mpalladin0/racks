@@ -6,7 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateProfileDto } from 'src/profiles/dto/create-profile.dto';
 import { ProfilesService } from 'src/profiles/profiles.service';
 import { UnitService } from 'src/unit/unit.service';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiHeader, ApiHeaders, ApiProperty } from '@nestjs/swagger';
 import { UpdateProfileDto } from 'src/profiles/dto/update-profile.dto';
 import { ValidPipe } from 'src/profiles/pipes/validation.pipe';
 
@@ -24,6 +24,9 @@ export class UsersController {
    * @returns The newly created user document
    * @exmaple POST user/create
    */
+  @ApiHeader({
+    name: 'User API'
+  })
   @Post('create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -61,6 +64,9 @@ export class UsersController {
    * @returns a fully populated profile for a given user
    * @example GET user/:userId/profile
    */
+   @ApiHeader({
+    name: 'Profile API'
+  })
   @UseGuards(JwtAuthGuard)
   @Get(':id/profile')
   findProfile(@Param('id') userId: string) {
@@ -83,7 +89,9 @@ export class UsersController {
   }
 
 
-
+  @ApiHeader({
+    name: 'Accounts API'
+  })
   @UseGuards(JwtAuthGuard)
   @Get(':id/applications')
   findApplications(@Param('id') userId: string) {
@@ -124,6 +132,9 @@ export class UsersController {
      return this.profilesService.findOne(userId)
    }
 
+   @ApiHeader({
+    name: 'Cards API'
+  })
    @UseGuards(JwtAuthGuard)
    @Get(':id/cards')
    getCards(@Param('id') userId: string) {

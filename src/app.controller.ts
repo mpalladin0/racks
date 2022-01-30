@@ -1,5 +1,6 @@
 import { Controller, Delete, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiHideProperty } from '@nestjs/swagger';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
@@ -8,14 +9,10 @@ import { LocalAuthGuard } from './auth/local-auth.guard';
 export class AppController {
   constructor(private authService: AuthService) {}
 
+  @ApiHideProperty()
   @Get('/')
   async returnHome() {
     return  `Racks | Online`
-  }
-
-  @Get('/.well-known/acme-challenge/AdVi-CU-ahmDhGj7mEnKY2qo8SNgUVeRtEUqWoRSWbc')
-  async returnChallenge() {
-    return `AdVi-CU-ahmDhGj7mEnKY2qo8SNgUVeRtEUqWoRSWbc.eGvCmrZ8msnGq5sBVvHvjrQhtjilAA1Xf_Fhvl0hnVc`
   }
 
   @UseGuards(LocalAuthGuard)
@@ -24,10 +21,10 @@ export class AppController {
     return this.authService.login(req.user)
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('profile')
+  // getProfile(@Request() req) {
+  //   return req.user
+  // }
   
 }
