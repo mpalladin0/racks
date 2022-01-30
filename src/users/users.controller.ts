@@ -10,6 +10,8 @@ import { ApiHeader, ApiHeaders, ApiProperty } from '@nestjs/swagger';
 import { UpdateProfileDto } from 'src/profiles/dto/update-profile.dto';
 import { ValidPipe } from 'src/profiles/pipes/validation.pipe';
 
+
+@ApiHeader({ name: 'User API' })
 @Controller('user')
 export class UsersController {
   constructor(
@@ -64,9 +66,6 @@ export class UsersController {
    * @returns a fully populated profile for a given user
    * @example GET user/:userId/profile
    */
-   @ApiHeader({
-    name: 'Profile API'
-  })
   @UseGuards(JwtAuthGuard)
   @Get(':id/profile')
   findProfile(@Param('id') userId: string) {
@@ -89,9 +88,6 @@ export class UsersController {
   }
 
 
-  @ApiHeader({
-    name: 'Accounts API'
-  })
   @UseGuards(JwtAuthGuard)
   @Get(':id/applications')
   findApplications(@Param('id') userId: string) {
@@ -132,9 +128,6 @@ export class UsersController {
      return this.profilesService.findOne(userId)
    }
 
-   @ApiHeader({
-    name: 'Cards API'
-  })
    @UseGuards(JwtAuthGuard)
    @Get(':id/cards')
    getCards(@Param('id') userId: string) {
