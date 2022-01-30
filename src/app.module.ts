@@ -10,6 +10,7 @@ import { EventsModule } from './events/events.module';
 import { RawBodyMiddleware } from './RawBodyMiddleware';
 import { JsonBodyMiddleware } from './users/JsonBodyMiddleware';
 import { RouteInfo } from '@nestjs/common/interfaces';
+import { AdminModule } from '@adminjs/nestjs';
 
 @Module({
   imports: [
@@ -18,7 +19,13 @@ import { RouteInfo } from '@nestjs/common/interfaces';
       connection.plugin(require('mongoose-autopopulate'));
       return connection
     }
-  }), 
+  }),
+    AdminModule.createAdmin({
+      adminJsOptions: {
+        rootPath: '/admin',
+        resources: []
+      }
+    }),
     UsersModule, 
     ProfilesModule, 
     UnitModule,
