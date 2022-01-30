@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,6 +8,7 @@ import { ProfilesService } from 'src/profiles/profiles.service';
 import { UnitService } from 'src/unit/unit.service';
 import { ApiProperty } from '@nestjs/swagger';
 import { UpdateProfileDto } from 'src/profiles/dto/update-profile.dto';
+import { ValidPipe } from 'src/profiles/pipes/validation.pipe';
 
 @Controller('user')
 export class UsersController {
@@ -76,7 +77,7 @@ export class UsersController {
   @Put(':id/profile')
   updateProfile(
     @Param('id') userId: string,
-    @Body('updateProfileDto') updateProfileDto: UpdateProfileDto
+    @Body(new ValidPipe()) updateProfileDto: UpdateProfileDto
   ) {
     return this.profilesService.update(userId, updateProfileDto)
   }

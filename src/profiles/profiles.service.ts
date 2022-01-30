@@ -28,8 +28,13 @@ export class ProfilesService {
   async update(userId: string, updateProfileDto: UpdateProfileDto) {
     const filter = { user: userId }
     const update = { ...updateProfileDto }
-    return await this.profileModel.findOneAndUpdate(filter, update).exec()
-      .catch(err => { return err })
+    const settings = { setDefaultsOnInsert: false, returnOriginal: false }
+
+    // await this.profileModel.findOneAndUpdate(filter, update, settings).validate()
+
+    console.log(filter, updateProfileDto)
+
+    return null
   }
 
   remove(id: number) {
