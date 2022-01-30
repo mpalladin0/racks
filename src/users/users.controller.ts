@@ -6,12 +6,12 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateProfileDto } from 'src/profiles/dto/create-profile.dto';
 import { ProfilesService } from 'src/profiles/profiles.service';
 import { UnitService } from 'src/unit/unit.service';
-import { ApiHeader, ApiHeaders, ApiProperty } from '@nestjs/swagger';
+import { ApiHeader, ApiHeaders, ApiOperation, ApiProperty } from '@nestjs/swagger';
 import { UpdateProfileDto } from 'src/profiles/dto/update-profile.dto';
 import { ValidPipe } from 'src/profiles/pipes/validation.pipe';
 
 
-@ApiHeader({ name: 'User API' })
+@ApiHeader({ name: 'User API', style: 'label'})
 @Controller('user')
 export class UsersController {
   constructor(
