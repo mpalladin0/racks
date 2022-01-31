@@ -28,7 +28,7 @@ AdminJS.registerAdapter({ Database, Resource });
         AuthModule,
       ],
       inject: [
-        getModelToken(User.name),
+        getModelToken('User'),
         AuthService
 
       ],

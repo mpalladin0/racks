@@ -10,7 +10,7 @@ export type UserDocument = User & Document
 @Schema()
 export class User {
 
-    @Prop({ type: String, enum: ['super', 'admin', 'restricted'], required: true, default: 'restricted' })
+    @Prop({ type: String, enum: ['super', 'admin', 'restricted'], required: true, default: 'restricted',  })
     role: string
 
     @Prop({ required: true, unique: true })
@@ -32,18 +32,6 @@ export class User {
 
     }])
     applications: UnitApplication[]
-
-    @Prop({
-      type: function() {},
-      method: function() {
-        console.log("Bing bong")
-      }
-    })
-    /**
-     * Delete the given user
-     * @returns void
-     */
-    deleteUser: () => void
 
 }
 
