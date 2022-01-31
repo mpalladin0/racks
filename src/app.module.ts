@@ -35,6 +35,10 @@ AdminJS.registerAdapter({ Database, Resource });
       useFactory: (userModel: Model<UserDocument>, authService: AuthService) => ({
         adminJsOptions: {
           rootPath: '/admin',
+          branding: {
+            companyName: 'Racks',
+            softwareBrothers: false,
+          },
           resources: [
             { resource: userModel },
             // { resource: null }
