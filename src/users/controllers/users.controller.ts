@@ -1,14 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Put, UsePipes, ValidationPipe } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { CreateProfileDto } from 'src/profiles/dto/create-profile.dto';
-import { ProfilesService } from 'src/profiles/profiles.service';
-import { UnitService } from 'src/unit/unit.service';
-import { ApiHeader, ApiHeaders, ApiOperation, ApiProperty } from '@nestjs/swagger';
-import { UpdateProfileDto } from 'src/profiles/dto/update-profile.dto';
-import { ValidPipe } from 'src/profiles/pipes/validation.pipe';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards, Put } from '@nestjs/common';
+import { UsersService } from '../users.service';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { ProfilesService } from '../../profiles/profiles.service';
+import { UnitService } from '../../unit/unit.service';
+import { ApiHeader } from '@nestjs/swagger';
+import { UpdateProfileDto } from '../../profiles/dto/update-profile.dto';
+import { ValidPipe } from '../../profiles/pipes/validation.pipe';
 
 
 @ApiHeader({ name: 'User API', style: 'label'})

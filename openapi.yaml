@@ -1,0 +1,326 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: returnHome
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  /auth/login:
+    post:
+      operationId: login
+      parameters: []
+      responses:
+        "201":
+          description: ""
+  /user/create:
+    post:
+      operationId: create
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: User API
+          in: header
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserDto"
+      responses:
+        "201":
+          description: ""
+  "/user/{userId}/delete":
+    delete:
+      operationId: delelteUserById
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{userId}":
+    get:
+      operationId: findOne
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/profile":
+    get:
+      operationId: findProfile
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+    put:
+      operationId: updateProfile
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileDto"
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/applications":
+    get:
+      operationId: findApplications
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/applications/create":
+    post:
+      operationId: createNewApplicationForUser
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "201":
+          description: ""
+  "/user/{id}/accounts":
+    get:
+      operationId: getAccounts
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/accounts/{accountId}":
+    get:
+      operationId: getAccountsById
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+    put:
+      operationId: updateAccountById
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/accounts/{accountId}/delete":
+    delete:
+      operationId: deleteAccountById
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/cards":
+    get:
+      operationId: getCards
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/cards/create/{type}":
+    post:
+      operationId: createCard
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "201":
+          description: ""
+  "/user/{id}/cards/{cardId}":
+    get:
+      operationId: getCardByID
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+    put:
+      operationId: updateCardById
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  "/user/{id}/cards/{cardId}/delete":
+    delete:
+      operationId: deleteCardById
+      parameters:
+        - name: User API
+          in: header
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+  /unit/webhook:
+    post:
+      operationId: respondToApproval
+      parameters: []
+      responses:
+        "201":
+          description: ""
+info:
+  title: Racks API
+  description: ""
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    ObjectId:
+      type: object
+      properties: {}
+    UpdateProfileDto:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/ObjectId"
+        phone:
+          type: number
+        dob:
+          type: string
+      required:
+        - phone
+        - dob

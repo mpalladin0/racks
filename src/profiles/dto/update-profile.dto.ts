@@ -1,6 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsDate, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { Profile } from '../schemas/profile.schema';
+import { IsDate, IsNotEmpty, IsNumber, IsOptional} from 'class-validator';
 import { CreateProfileDto } from './create-profile.dto';
 
 

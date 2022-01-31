@@ -1,8 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Profile, ProfileDocument } from 'src/profiles/schemas/profile.schema';
-import { UnitApplication, UnitApplicationDocument } from 'src/unit/schemas/application.schema';
+import { Profile, ProfileDocument } from '../profiles/schemas/profile.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
@@ -11,8 +10,7 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UsersService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
-    @InjectModel(Profile.name) private profileModel: Model<ProfileDocument>,
-    @InjectModel(UnitApplication.name) private applicationModel: Model<UnitApplicationDocument>)
+    @InjectModel(Profile.name) private profileModel: Model<ProfileDocument>)
     {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -47,6 +45,7 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
+    console.log(updateUserDto)
     return `This action updates a #${id} user`;
   }
 

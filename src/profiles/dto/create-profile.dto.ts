@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty, IsNumber, IsPhoneNumber } from "class-validator"
+import { IsNotEmpty } from "class-validator"
 import * as mongoose from "mongoose"
 
 export class CreateProfileDto {
