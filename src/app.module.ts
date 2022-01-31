@@ -35,9 +35,25 @@ AdminJS.registerAdapter({ Database, Resource });
       useFactory: (userModel: Model<UserDocument>, authService: AuthService) => ({
         adminJsOptions: {
           rootPath: '/admin',
+          version: {
+            admin: true,
+            app: "0.0.1",
+          },
+          locale: {
+            language: 'en',
+            translations: {
+              messages: {
+                loginWelcome: 'Administration Panel - Login' // the smaller text
+            },
+            labels: {
+                loginWelcome: 'Racks', // this could be your project name
+            },
+            }
+          },
           branding: {
             companyName: 'Racks',
             softwareBrothers: false,
+            logo: false,
           },
           resources: [
             { resource: userModel },
