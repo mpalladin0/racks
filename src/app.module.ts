@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import * as mongoose from 'mongoose';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
@@ -14,6 +14,8 @@ import { User, UserDocument, UserSchema } from './users/schemas/user.schema';
 import { Model } from 'mongoose';
 import { MongooseSchemasModule } from './mongoose-schemas-module/mongoose-schemas-module.module';
 import AdminJS from 'adminjs';
+import { UsersService } from './users/users.service';
+import { AuthService } from './auth/auth.service';
 
 AdminJS.registerAdapter({ Database, Resource });
 @Module({
@@ -22,19 +24,36 @@ AdminJS.registerAdapter({ Database, Resource });
     }),
     AdminModule.createAdminAsync({
       imports: [
-        MongooseSchemasModule
+        MongooseSchemasModule,
+        AuthModule,
       ],
       inject: [
-        getModelToken('User')
+        getModelToken('User'),
+        AuthService
+
       ],
-      useFactory: (userModel: Model<User>) => ({
+      useFactory: (userModel: Model<UserDocument>, authService: AuthService) => ({
         adminJsOptions: {
           rootPath: '/admin',
           resources: [
-            { resource: userModel }
-          ]
+            { resource: userModel },
+            // { resource: null }
+          ],
+        },
+        auth: {
+          authenticate: async (email, password) => {
+            const user = await authService.validateUser(email, password)
+            .catch(err => err = null)
+            if (user) {
+              return user
+            }
+            return false
+          },
+          cookiePassword: 'some-secret-password-used-to-secure-cookie-hc7daso8gv7ds',
+          cookieName: 'vds',
         }
       })
+
     }),
     MongooseSchemasModule,
     UsersModule, 

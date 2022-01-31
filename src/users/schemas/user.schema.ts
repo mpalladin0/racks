@@ -9,6 +9,10 @@ export type UserDocument = User & Document
 
 @Schema()
 export class User {
+
+    @Prop({ type: String, enum: ['admin', 'restricted'], required: true, default: 'restricted' })
+    role: string
+
     @Prop({ required: true, unique: true })
     email: string
 
