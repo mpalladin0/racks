@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-import { Profile, ProfileDocument } from './schemas/profile.schema';
+import { Profile } from './schemas/profile.schema';
 
 @Injectable()
 export class ProfilesService {
-  constructor(@InjectModel(Profile.name) private profileModel: Model<ProfileDocument>) {}
+  constructor(@InjectModel(Profile.name) private profileModel: Model<Profile>) {}
 
   async create(createProfileDto) {
     const createdProfile = new this.profileModel(createProfileDto)

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, UseGuards, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards, Put, UseInterceptors } from '@nestjs/common';
 import { UsersService } from '../users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
@@ -6,7 +6,7 @@ import { ProfilesService } from '../../profiles/profiles.service';
 import { UnitService } from '../../unit/unit.service';
 import { ApiHeader } from '@nestjs/swagger';
 import { UpdateProfileDto } from '../../profiles/dto/update-profile.dto';
-import { ValidPipe } from '../../profiles/pipes/validation.pipe';
+import { ValidationInterceptor } from '../../profiles/pipes/validation.interceptor';
 
 
 @ApiHeader({ name: 'User API', style: 'label'})
@@ -77,10 +77,11 @@ export class UsersController {
    * @example PUT user/:userId/profile 
    */
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(ValidationInterceptor)
   @Put(':id/profile')
   updateProfile(
     @Param('id') userId: string,
-    @Body(new ValidPipe()) updateProfileDto: UpdateProfileDto
+    @Body() updateProfileDto: UpdateProfileDto,
   ) {
     return this.profilesService.update(userId, updateProfileDto)
   }

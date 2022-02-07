@@ -3,6 +3,7 @@ import { IsEmail, IsNotEmpty } from "class-validator";
 import { Profile } from "src/profiles/schemas/profile.schema";
 
 export class CreateUserDto {
+    constructor(email: string, password: string) {}
     @ApiProperty()
     @IsNotEmpty()
     @IsEmail()
