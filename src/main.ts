@@ -38,32 +38,32 @@ async function bootstrap() {
     explorer: false
   });
 
-  await OpenApiNestFactory.
-    configure(app, 
-      new DocumentBuilder()
-        .setTitle('Racks API')
-        .addBearerAuth(),  
-      {
-        webServerOptions: {
-          enabled: false,
-          path: 'api',
-        },
-        fileGeneratorOptions: {
-          enabled: true,
-          outputFilePath: './openapi.json',  // or ./openapi.json
-        },
-        clientGeneratorOptions: {
-          enabled: true,
-          type: 'typescript-axios',
-          outputFolderPath: '../racks-client-sdk/src',
-          additionalProperties:
-            'apiPackage=clients,modelPackage=models,withoutPrefixEnums=true,withSeparateModelsAndApi=false',
-          openApiFilePath: './openapi.json', // or ./openapi.json
-          skipValidation: true, // optional, false by default
+  // await OpenApiNestFactory.
+  //   configure(app, 
+  //     new DocumentBuilder()
+  //       .setTitle('Racks API')
+  //       .addBearerAuth(),  
+  //     {
+  //       webServerOptions: {
+  //         enabled: false,
+  //         path: 'api',
+  //       },
+  //       fileGeneratorOptions: {
+  //         enabled: true,
+  //         outputFilePath: './openapi.json',  // or ./openapi.json
+  //       },
+  //       clientGeneratorOptions: {
+  //         enabled: true,
+  //         type: 'typescript-axios',
+  //         outputFolderPath: '../racks-client-sdk/src',
+  //         additionalProperties:
+  //           'apiPackage=clients,modelPackage=models,withoutPrefixEnums=true,withSeparateModelsAndApi=false',
+  //         openApiFilePath: './openapi.json', // or ./openapi.json
+  //         skipValidation: true, // optional, false by default
 
-        },
-      }, { operationIdFactory: (c: string, method: string) => method }
-    );
+  //       },
+  //     }, { operationIdFactory: (c: string, method: string) => method }
+  //   );
 
   await app.listen(process.env.PORT || 3000)
 }
